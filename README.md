@@ -130,6 +130,8 @@ sqlite3 -header -column schedule.db < queries.sql
 ## Реализация графовой базы данных
 Код для реализации и наполнения БД живет в папке [graph](/graph/), это файлы с расширением `.cypher`. Для запуска и проверки можно использовать любое ПО для работы с Neo4j, например, Neo4j Desktop.
 
+В отличие от реляционной модели, в графовой нет необходимости создавать связующую таблицу SubscriptionItem, так как в LPG связь M:M между Subscription и SportService выражается напрямую через рёбро (relationship). Обновленная схема связей представлена на диаграмме:
+
 ```mermaid
 erDiagram
   CLIENT ||--o{ SUBSCRIPTION : HAS_SUBSCRIPTION
