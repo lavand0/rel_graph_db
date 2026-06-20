@@ -1,0 +1,41 @@
+Table Client {
+  client_id integer [primary key]
+  surname varchar [not null]
+  name varchar [not null]
+  patronymic varchar
+  gender varchar [not null]
+  birth_date date [not null]
+  phone varchar [not null, unique]
+  email varchar [unique]
+}
+
+Table Subscription {
+  subscription_id integer [primary key]
+  client_id integer [not null]
+  start_date date [not null]
+  end_date date
+  visit_limit integer
+  price integer [not null]
+  paid_at timestamp
+}
+
+Table SportService {
+  sport_service_id integer [primary key]
+  title varchar [not null]
+  location varchar [not null]
+  price integer [not null]
+}
+
+Table SubscriptionItem {
+  subscription_item_id integer [primary key]
+  subscription_id integer [not null]
+  sport_service_id integer [not null]
+
+  indexes {
+    (subscription_id, sport_service_id) [unique]
+  }
+}
+
+Ref: Subscription.client_id > Client.client_id
+Ref: SubscriptionItem.subscription_id > Subscription.subscription_id
+Ref: SubscriptionItem.sport_service_id > SportService.sport_service_id
